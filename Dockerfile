@@ -39,7 +39,6 @@ RUN apt-get update && apt-get install -y \
     postgresql-9.5 \
     postgresql-client=9.5\* \
     python2.7-dev \
-    python3.4-dev \
     python3.6-dev \
     python-dev=2.7.\* \
     python3-dev=3.5.\* \
@@ -50,12 +49,10 @@ RUN apt-get update && apt-get install -y \
 # See: https://pip.pypa.io/en/stable/installing/
 RUN curl https://bootstrap.pypa.io/get-pip.py -o ./get-pip.py && \
     python2.7 get-pip.py && \
-    python3.4 get-pip.py && \
     python3.6 get-pip.py
 
 # Upgrade pip and install virtualenv
 RUN python2.7 -m pip install -U pip virtualenvwrapper wheel && \
-    python3.4 -m pip install -U pip virtualenvwrapper wheel && \
     python3.6 -m pip install -U pip virtualenvwrapper wheel
 
 CMD ["/bin/bash"]
