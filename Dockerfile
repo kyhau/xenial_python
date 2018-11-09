@@ -1,8 +1,8 @@
 FROM ubuntu:16.04
-MAINTAINER Kay Hau <virtualda@gmail.com>
+LABEL maintainer="virtualda@gmail.com"
 
 # Add the add-apt-repository command
-RUN apt-get update && apt-get install -y --force-yes \
+RUN apt update && apt install -y \
     apt-transport-https \
     curl=7.47.\* \
     software-properties-common
@@ -14,10 +14,10 @@ RUN add-apt-repository -y ppa:webupd8team/java && \
     add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
 
 # Install commonly used base packages
-RUN apt-get update && apt-get install -y \
+RUN apt update && apt install -y \
     build-essential=12.1\* \
     cmake=3.5.\* \
-    docker-ce=17.06.\* \
+    docker-ce=18.03.\* \
     g++=4:5.3.\* \
     gcc=4:5.3.\* \
     git=1:2.7.\* \
@@ -40,6 +40,7 @@ RUN apt-get update && apt-get install -y \
     postgresql-client=9.5\* \
     python2.7-dev \
     python3.6-dev \
+    python3.7-dev \
     python-dev=2.7.\* \
     python3-dev=3.5.\* \
     sendmail=8.15.\* \
@@ -49,10 +50,13 @@ RUN apt-get update && apt-get install -y \
 # See: https://pip.pypa.io/en/stable/installing/
 RUN curl https://bootstrap.pypa.io/get-pip.py -o ./get-pip.py && \
     python2.7 get-pip.py && \
+    python3.7 get-pip.py && \
     python3.6 get-pip.py
 
 # Upgrade pip and install virtualenv
+# Default pip is python3.6 version
 RUN python2.7 -m pip install -U pip virtualenvwrapper wheel && \
+    python3.7 -m pip install -U pip virtualenvwrapper wheel && \
     python3.6 -m pip install -U pip virtualenvwrapper wheel
 
 CMD ["/bin/bash"]
