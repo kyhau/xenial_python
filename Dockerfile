@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:23.04
 LABEL maintainer="virtualda@gmail.com"
 
 # Add the add-apt-repository command
